@@ -29,10 +29,10 @@ class ClienteView(viewsets.ModelViewSet):
         return Response(serializer.data)
     
     def login(self, request):
-        username = request.data.get('username')
-        password = request.data.get('password')
+        email = request.data.get('correo')
+        password = request.data.get('contraseña')
         
-        user = authenticate(request, username=username, password=password)
+        user = authenticate(request, username=email, password=password)
         
         if user is not None:
             login(request, user)  # Inicia sesión al usuario
