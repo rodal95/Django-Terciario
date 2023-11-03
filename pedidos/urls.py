@@ -8,6 +8,6 @@ router = routers.DefaultRouter()
 router.register(r'pedidos',views.PedidoViews,'pedidos')
 
 urlpatterns = [
-    path('vistaPedido/', include(router.urls)),
+    path('/', include(router.urls)),
 
 ]

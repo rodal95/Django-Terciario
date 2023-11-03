@@ -4,10 +4,10 @@ from rest_framework.documentation import include_docs_urls
 from clientes import views
 
 router = routers.DefaultRouter()
-router.register(r'clientes',views.ClienteView)
+router.register(r'clientes',views.ClienteView,'clientes')
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('/', include(router.urls)),
     path('clientes/agregar/', views.ClienteView.as_view({'post': 'create'}), name='cliente-agregar'),
     # Ruta personalizada para consultar un cliente (GET)
     path('clientes/consultar/<int:pk>/', views.ClienteView.as_view({'get': 'retrieve'}), name='cliente-consultar'),

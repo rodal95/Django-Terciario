@@ -8,6 +8,6 @@ router = routers.DefaultRouter()
 router.register(r'carritos',views.CarritoView,'carritos')
 
 urlpatterns = [
-    path('vistaCarrito/', include(router.urls)),
+    path('/', include(router.urls)),
 
 ]
