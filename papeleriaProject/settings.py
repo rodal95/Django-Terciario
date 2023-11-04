@@ -131,21 +131,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOWED_ORIGINS= config('CORS_ALLOW_HOST', default='').split(',')
 
 REST_FRAMEWORK={
-    
     'DEFAULT_SCHEMA_CLASS':'rest_framework.schemas.coreapi.AutoSchema',
 }
-
-SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),  # Define la duración del token de acceso
-    'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),  # Define la duración de refresco del token deslizante
-    'SLIDING_TOKEN_LIFETIME': timedelta(days=14),  # Define la duración del token deslizante
-    'SLIDING_TOKEN_REFRESH_LIFETIME_ALGORITHM': 'HS256',
-    'SLIDING_TOKEN_LIFETIME_ALGORITHM': 'HS256',
-    'SLIDING_TOKEN_REFRESH_LIFETIME_LEEWAY': timedelta(days=1),
-    'SLIDING_TOKEN_LIFETIME_LEEWAY': timedelta(days=0),
-    
-}
-
 
 EMAIL_BACKEND = config("EMAIL_BACKEND")
 EMAIL_HOST = config("EMAIL_HOST")  # Ejemplo de servidor SMTP de Gmail

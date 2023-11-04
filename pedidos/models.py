@@ -8,7 +8,7 @@ class Pedido(models.Model):
     total_pedido = models.PositiveIntegerField()
 
     def __str__(self):
-        return f'Pedido {self.id_pedido} - Cliente: {self.id_cliente}'
+        return f'Pedido {self.id} - Cliente: {self.cliente_id}'
     
     
 class PedidoProducto(models.Model):
@@ -17,6 +17,6 @@ class PedidoProducto(models.Model):
     precio_producto = models.PositiveIntegerField()
     cantidad_elegida_producto = models.PositiveIntegerField()
     subtotal = models.PositiveIntegerField()
-
+    imagen = models.CharField(max_length=500)
     def __str__(self):
-        return f'Producto en Pedido {self.id_pedido} - Producto: {self.id_producto.nombre}'
+        return f'Producto en Pedido {self.pedido_id} - Producto: {self.producto_id.nombre}'

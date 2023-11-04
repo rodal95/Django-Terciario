@@ -2,12 +2,12 @@ from django.contrib.auth.hashers import make_password, check_password
 from rest_framework import viewsets
 from .serializer import ClienteSerializer
 from .models import Cliente
-from rest_framework_simplejwt.tokens import RefreshToken, AccessToken
 from rest_framework.response import Response
 from rest_framework import status
 import jwt
 from django.conf import settings
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
+from datetime import datetime, timedelta
 
 class ClienteView(viewsets.ModelViewSet):
     serializer_class = ClienteSerializer
@@ -32,10 +32,9 @@ class ClienteView(viewsets.ModelViewSet):
             user_id = decoded_payload.get('user_id', None)
 
             if user_id is not None:
-                # Consulta la base de datos para obtener información del usuario
                 try:
                     user = Cliente.objects.get(id=user_id)
-                    return JsonResponse({'message': 'Información del usuario', 'user_id': user.id, 'username': user.correo})
+                    return JsonResponse({'message': 'Información del usuario', 'id': user.id,"nombre":user.nombre, 'correo': user.correo})
                 except Cliente.DoesNotExist:
                     return JsonResponse({'message': 'Usuario no encontrado'}, status=404)
             else:
@@ -51,9 +50,11 @@ class ClienteView(viewsets.ModelViewSet):
         try:
             user = Cliente.objects.get(correo=email)
             if check_password(password, user.contraseña):
-                token_payload = {'user_id': user.id, 'username': user.correo}
+                response = HttpResponse()
+                token_payload = {'user_id': user.id, 'username': user.correo,'exp': datetime.utcnow() + timedelta(hours=1) }
                 token = jwt.encode(token_payload, settings.SECRET_KEY, algorithm='HS256')
-                return JsonResponse({'access_token': token}, status=200)
+                response.set_cookie('access_token',token, httponly=True, max_age=3600)
+                return response
         except Cliente.DoesNotExist:
             pass  # Maneja la excepción si el usuario no existe
 

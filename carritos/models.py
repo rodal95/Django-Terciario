@@ -8,7 +8,7 @@ class Carrito(models.Model):
     fecha_ultima_actividad = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f'Carrito {self.id_carrito} - Cliente: {self.id_cliente}'
+        return f'Carrito {self.id} - Cliente: {self.cliente_id}'
     
 class CarritoProducto(models.Model):
     carrito = models.ForeignKey(Carrito, on_delete=models.CASCADE)
@@ -16,6 +16,9 @@ class CarritoProducto(models.Model):
     precio_producto = models.PositiveIntegerField()
     cantidad_elegida_producto = models.IntegerField()
     subtotal = models.IntegerField()
+    imagen = models.CharField(max_length=500 , default='')
 
     def __str__(self):
-        return f'Producto en Carrito {self.id_carrito} - Producto: {self.id_producto.nombre}'
+        return f'Producto en Carrito {self.carrito_id} - Producto: {self.producto_id.nombre}'
+    
+    
