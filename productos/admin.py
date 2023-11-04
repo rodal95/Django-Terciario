@@ -5,7 +5,8 @@ from .models import Producto, Categoria
 
 
 class ProductoAdmin(admin.ModelAdmin):
-    list_display = ['id','nombre','stock','precio','imagen_url']
+    list_display = ['id','nombre','stock','precio','categoria']
+
 
 admin.site.register(Producto, ProductoAdmin)
 admin.site.register(Categoria)

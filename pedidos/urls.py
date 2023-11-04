@@ -4,10 +4,7 @@ from rest_framework.documentation import include_docs_urls
 from pedidos import views
 
 
-router = routers.DefaultRouter()
-router.register(r'pedidos',views.PedidoViews,'pedidos')
-
 urlpatterns = [
-    path('/', include(router.urls)),
+    path('pedidosId/<int:userId>/', views.PedidoViews.as_view({'get': 'pedidos'})),
 
 ]
