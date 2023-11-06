@@ -8,7 +8,7 @@ import jwt
 from django.conf import settings
 from django.http import JsonResponse, HttpResponse
 from datetime import datetime, timedelta
-
+from .decorators import token_required
 class ClienteView(viewsets.ModelViewSet):
     serializer_class = ClienteSerializer
     queryset = Cliente.objects.all()
@@ -24,25 +24,14 @@ class ClienteView(viewsets.ModelViewSet):
         
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
-
-    def consultar(self, request, *args, **kwargs):
-        token = request.META.get('HTTP_AUTHORIZATION', "").split(' ')[1]
+    @token_required
+    def consultar(self, request):
+        user_id = request.user_id
         try:
-            decoded_payload = jwt.decode(token, settings.SECRET_KEY, algorithms=['HS256'])
-            user_id = decoded_payload.get('user_id', None)
-
-            if user_id is not None:
-                try:
-                    user = Cliente.objects.get(id=user_id)
-                    return JsonResponse({'message': 'Información del usuario', 'id': user.id,"nombre":user.nombre, 'correo': user.correo})
-                except Cliente.DoesNotExist:
-                    return JsonResponse({'message': 'Usuario no encontrado'}, status=404)
-            else:
-                return JsonResponse({'message': 'Token no válido'}, status=401)
-        except jwt.ExpiredSignatureError:
-            return JsonResponse({'message': 'Token ha expirado'}, status=401)
-        except jwt.InvalidTokenError:
-            return JsonResponse({'message': 'Token no válido'}, status=401)
+            user = Cliente.objects.get(id=user_id)
+            return JsonResponse({'message': 'Información del usuario', 'id': user.id,"nombre":user.nombre, 'correo': user.correo})
+        except Cliente.DoesNotExist:
+            return JsonResponse({'message': 'Usuario no encontrado'}, status=404)
 
     def login(self, request):
         email = request.data.get('correo')

@@ -6,6 +6,6 @@ from carritos import views
 
 
 urlpatterns = [
-    path('carritoId/<int:userId>/', views.CarritoView.as_view({'get': 'carritosAbiertos'})),
-
+    path('carritosId/', views.CarritoView.as_view({'get': 'carritosAbiertos'})),
+    path('agregarcarrito/', views.CarritoView.as_view({'post':'agregar_o_actualizar_carrito'}))
 ]

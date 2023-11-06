@@ -19,6 +19,6 @@ class CarritoProducto(models.Model):
     imagen = models.CharField(max_length=500 , default='')
 
     def __str__(self):
-        return f'Producto en Carrito {self.carrito_id} - Producto: {self.producto_id.nombre}'
+        return f'Producto en Carrito {self.carrito_id} - Producto: {self.producto_id}'
     
     
