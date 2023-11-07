@@ -36,15 +36,15 @@ class ClienteView(viewsets.ModelViewSet):
     def login(self, request):
         email = request.data.get('correo')
         password = request.data.get('contraseña')
+        print(request.data.get('correo'))
         try:
             user = Cliente.objects.get(correo=email)
             if check_password(password, user.contraseña):
                 response = HttpResponse()
                 token_payload = {'user_id': user.id, 'username': user.correo,'exp': datetime.utcnow() + timedelta(hours=1) }
                 token = jwt.encode(token_payload, settings.SECRET_KEY, algorithm='HS256')
-                response.set_cookie('access_token',token, httponly=True, max_age=3600)
-                return response
+                return JsonResponse({'token': token, 'message': 'Inicio de sesión exitoso'})
         except Cliente.DoesNotExist:
-            pass  # Maneja la excepción si el usuario no existe
+            pass 
 
         return JsonResponse({'message': 'Login fallido'}, status=401)

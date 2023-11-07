@@ -4,7 +4,7 @@ import Cookies from 'js-cookie';
 import {toast} from 'react-hot-toast'
 
 export default function Botonera({producto}) {
-    const [cantidad,setCantidad]= useState(0)
+    const [cantidad,setCantidad]= useState(1)
     const [token, setToken]=useState(null)
     const tokenCookie = Cookies.get('access_token')
     useEffect(()=>{
@@ -20,16 +20,16 @@ export default function Botonera({producto}) {
         
     }
     const restar = ()=>{
-        if(cantidad > 0)
+        if(cantidad > 1)
         setCantidad(cantidad - 1);
     }
-    const agregarCarrito = ()=>{
+    const agregarCarrito = async ()=>{
         if(token){
             const data = {
                 "id_producto":producto.id_producto,
-                "cantidad":cantidad
+                "cantidad": cantidad
             }
-            agregarProductoCarrito(data,token)
+            await agregarProductoCarrito(data,token)
             toast("Producto agregado a carrito correctamente")
         }else{
             toast("Recuerda loguearte para guardar productos en tu carrito")
@@ -38,10 +38,10 @@ export default function Botonera({producto}) {
   return (
     <div>
 
-        <button type="button" class="btn btn-primary" onClick={agregarCarrito}> Agregar Carrito</button>
-        <button type="button" class="btn btn-primary" onClick={sumar}>+</button>
+        <button type="button" className="btn btn-primary" onClick={agregarCarrito}> Agregar Carrito</button>
+        <button type="button" className="btn btn-primary" onClick={sumar}>+</button>
         <span>Cantidad Elegida {cantidad}</span>
-        <button type="button" class="btn btn-primary" onClick={restar}>-</button>
+        <button type="button" className="btn btn-primary" onClick={restar}>-</button>
         
         
     </div>

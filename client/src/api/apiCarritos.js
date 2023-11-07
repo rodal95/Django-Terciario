@@ -7,10 +7,10 @@ const apiCarritos = axios.create({
 });
 
 export const agregarProductoCarrito = (data,token)=>{
-    return apiCarritos.post('agregarcarrito/',data,{headers:{Authorization:`Bearer ${token}`}});
+    return apiCarritos.post('agregarCarrito/',data,{headers:{Authorization:`Bearer ${token}`}});
 }
 
 export const consultarCarrito = (token)=>{
-    return apiCarritos.get('carritoId/',{headers:{Authorization:`Bearer ${token}`}}) 
+    return apiCarritos.get('carritosId/',{headers:{Authorization:`Bearer ${token}`}}) 
 }
 

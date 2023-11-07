@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react"
 import Cookies from "js-cookie"
-import toast from "react-hot-toast"
 
 export  function User() {
   const [token, setToken]=useState(null)
@@ -11,7 +10,7 @@ export  function User() {
           setToken(tokenCookie)
       }else{
         setTimeout(()=>{
-          window.location.href = "/"
+          window.location.href = "/login"
         },2000)
       }
   }
@@ -22,6 +21,7 @@ export  function User() {
     {token ? (
       <div>
         <h1>User</h1>
+        <h1>Bienvenido usuario</h1>
     </div>) :  <h1>Recuerda loguearte para acceder a tu usuario</h1>}
     </>
   )
