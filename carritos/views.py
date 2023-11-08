@@ -15,8 +15,7 @@ class CarritoView(viewsets.ViewSet):
 
         data = []
         for producto in productos:
-            data.append({'id_producto': producto.id, 'precio': producto.precio_producto,'cantidad':producto.cantidad_elegida_producto,'subtotal':producto.subtotal*producto.precio_producto})
-        print(data)
+            data.append({'id_producto': producto.producto_id, 'precio': producto.precio_producto,'cantidad':producto.cantidad_elegida_producto,'subtotal':producto.subtotal*producto.precio_producto})
         return JsonResponse(data, safe=False)
     @token_required
     def agregar_o_actualizar_carrito(self,request):
@@ -24,9 +23,7 @@ class CarritoView(viewsets.ViewSet):
             try:
                 user_id = request.user_id
                 id_producto = (request.data.get('id_producto'))
-                print(id_producto)
                 cantidad_elegida = (request.data.get('cantidad'))
-                print(cantidad_elegida)
                 query = 'SELECT AgregarOActualizarCarrito(%s,%s,%s)'
                 with connections['default'].cursor() as cursor:
                     cursor.execute(query, (user_id, id_producto, cantidad_elegida))

@@ -43,7 +43,8 @@ class ClienteView(viewsets.ModelViewSet):
                 response = HttpResponse()
                 token_payload = {'user_id': user.id, 'username': user.correo,'exp': datetime.utcnow() + timedelta(hours=1) }
                 token = jwt.encode(token_payload, settings.SECRET_KEY, algorithm='HS256')
-                return JsonResponse({'token': token, 'message': 'Inicio de sesión exitoso'})
+                token_str = token.decode('utf-8')
+                return JsonResponse({'token': token_str, 'message': 'Inicio de sesión exitoso'})
         except Cliente.DoesNotExist:
             pass 
 

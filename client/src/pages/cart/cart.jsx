@@ -30,28 +30,33 @@ export function Cart() {
       toast.error("No se pudo obtener el carrito")
     }
   }
+  const calcularSubtotal = (producto) => {
+    return producto.cantidad * producto.precio; // Asume que tienes el precio en tus datos de producto
+  };
+  const total = productos.reduce((total, producto) => total + calcularSubtotal(producto), 0)
   return (
     <>
       {token ? (
         productos.length > 0 ? (
           <div>
-            <h1>Cart</h1>
+            <h1>Carrito</h1>
             <h2>Productos en el carrito</h2>
             <ul>
               {productos.map((producto) => (
-                <ProductosCart key={producto.id} producto={producto} />
+                <ProductosCart key={producto.id_producto} producto={producto} />
               ))}
             </ul>
+            <h1>Total: {total}</h1>
           </div>
         ) : (
           <div>
-            <h1>Cart</h1>
+            <h1>Carrito</h1>
             <h2>No hay productos en el carrito</h2>
           </div>
         )
       ) : (
         <div>
-          <h1>Cart</h1>
+          <h1>Carrito</h1>
           <h2>Recuerda iniciar sesión para ver tu carrito</h2>
         </div>
       )}

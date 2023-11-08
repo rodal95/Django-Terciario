@@ -43,7 +43,7 @@ export function Login() {
           <input className="form-control form-control-lg" type="password" id="password" {...register("contraseña", { required: true })} />
           {errors.contraseña && <span>This field is required</span>}
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
       </form>
     </div>
   )
