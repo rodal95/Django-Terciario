@@ -1,7 +1,7 @@
 from django.db import models
 from clientes.models import Cliente
 from productos.models import Producto
-# Create your models here.
+
 class Carrito(models.Model):
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     abierto = models.BooleanField()

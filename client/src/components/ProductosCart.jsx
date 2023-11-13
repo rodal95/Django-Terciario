@@ -1,9 +1,9 @@
 import { useState,useEffect } from 'react';
 import { toast } from 'react-hot-toast';
-import { agregarProductoCarrito } from '../api/apiCarritos';
+
 import Cookies from 'js-cookie';
 
-export function ProductosCart({producto}) {
+export function ProductosCart({producto, actualizarTotal}) {
     const [cantidad, setCantidad] = useState(producto.cantidad);
     const [token, setToken]=useState(null)
     const tokenCookie = Cookies.get('access_token')
@@ -13,33 +13,25 @@ export function ProductosCart({producto}) {
         }
     }
     ,[])
+    
     const sumarCantidad = async () => {
-        const newCantidad = cantidad + 1
-        setCantidad(newCantidad)
-        await agregarProductoCarrito({'id_producto':producto.id_producto,'cantidad': 1},token)
-        
-    };
-    const restarCantidad =async () => {
-      
-        const newCantidad = cantidad - 1
-        setCantidad(newCantidad)
-        if(newCantidad > 0){
-            await agregarProductoCarrito({'id_producto':producto.id_producto,'cantidad': -1},token)
-        }else{
-            window.location.reload()
+        const newCantidad = cantidad + 1;
+        setCantidad(newCantidad);
+        actualizarTotal(producto.id_producto, 1);
+      };
+      const restarCantidad = async () => {
+        const newCantidad = cantidad - 1;
+        setCantidad(newCantidad);
+        if (newCantidad > 0) {
+          actualizarTotal(producto.id_producto, -1);
+        } else {
+          toast.error("La cantidad mínima es 1");
         }
-            
-       
-        
-        
-    };
+      };
 
-    const eliminarProducto = async () => {
-        
-        await agregarProductoCarrito({'id_producto':producto.id_producto,'cantidad': -producto.cantidad},token)
-        setCantidad(0)
-        window.location.reload()
-    };
+      const eliminarProducto = async () => {
+        actualizarTotal(producto.id_producto, -producto.cantidad);
+      };
 
     return (
         <>

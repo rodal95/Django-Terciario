@@ -3,10 +3,13 @@ import { consultarCarrito } from "../../api/apiCarritos"
 import Cookies from "js-cookie"
 import toast from "react-hot-toast"
 import { ProductosCart } from "../../components/ProductosCart"
+import { agregarProductoCarrito } from '../../api/apiCarritos';
 export function Cart() {
   const [token, setToken]=useState(null)
   const [productos,setProductos]=useState([])
+  const [loading, setLoading] = useState(true);
   const tokenCookie = Cookies.get('access_token')
+  const [total, setTotal] = useState(0);
 
   useEffect(()=>{
       if(tokenCookie){
@@ -21,45 +24,67 @@ export function Cart() {
       }
   }
   ,[])
+  useEffect(() => {
+    // Calcular el total cada vez que cambie la lista de productos
+    const nuevoTotal = productos.reduce(
+      (acc, producto) => acc + producto.precio * producto.cantidad,
+      0
+    );
+    setTotal(nuevoTotal);
+  }, [productos]);
+
+
   async function ObtenerProductos(token){
     const response = await consultarCarrito(token)
+    setLoading(false);
     if(response.data){
       console.log(response.data)
       setProductos(response.data)
+      setLoading(false);
+      
     }else{
       toast.error("No se pudo obtener el carrito")
     }
-  }
-  const calcularSubtotal = (producto) => {
-    return producto.cantidad * producto.precio; // Asume que tienes el precio en tus datos de producto
+  }  
+  const actualizarTotal = async (id_producto, cambio) => {
+    try {
+      // Actualizar la cantidad del producto
+      await agregarProductoCarrito({ 'id_producto': id_producto, 'cantidad': cambio }, token);
+      // Volver a obtener los productos para reflejar los cambios
+      ObtenerProductos(token);
+    } catch (error) {
+      console.error("Error al actualizar la cantidad del producto:", error);
+      toast.error("Error al actualizar la cantidad del producto");
+    }
   };
-  const total = productos.reduce((total, producto) => total + calcularSubtotal(producto), 0)
+
   return (
     <>
-      {token ? (
-        productos.length > 0 ? (
-          <div>
-            <h1>Carrito</h1>
-            <h2>Productos en el carrito</h2>
-            <ul>
-              {productos.map((producto) => (
-                <ProductosCart key={producto.id_producto} producto={producto} />
-              ))}
-            </ul>
-            <h1>Total: {total}</h1>
-          </div>
+      <div>
+        <h1>Carrito</h1>
+        {token ? (
+          <>
+            {loading ? (
+              <h2>Cargando productos...</h2>
+            ) : productos.length > 0 ? (
+              <>
+                <h2>Productos en el carrito</h2>
+                <ul>
+                  {productos.map((producto) => (
+                    <ProductosCart key={producto.id_producto} producto={producto} actualizarTotal={actualizarTotal} />
+                  ))}
+                </ul>
+                <h1>Total:$ {total} pesos</h1>
+              </>
+            ) : (
+              <h2>No hay productos en el carrito</h2>
+            )}
+          </>
         ) : (
-          <div>
-            <h1>Carrito</h1>
-            <h2>No hay productos en el carrito</h2>
-          </div>
-        )
-      ) : (
-        <div>
-          <h1>Carrito</h1>
           <h2>Recuerda iniciar sesión para ver tu carrito</h2>
-        </div>
-      )}
+        )}
+      </div>
     </>
   );
 }
+

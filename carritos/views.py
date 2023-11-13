@@ -15,7 +15,7 @@ class CarritoView(viewsets.ViewSet):
 
         data = []
         for producto in productos:
-            data.append({'id_producto': producto.producto_id, 'precio': producto.precio_producto,'cantidad':producto.cantidad_elegida_producto,'subtotal':producto.subtotal*producto.precio_producto})
+            data.append({'id_producto': producto.producto_id, 'precio': producto.precio_producto,'cantidad':producto.cantidad_elegida_producto,'subtotal':producto.subtotal})
         return JsonResponse(data, safe=False)
     @token_required
     def agregar_o_actualizar_carrito(self,request):

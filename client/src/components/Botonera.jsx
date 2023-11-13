@@ -42,8 +42,6 @@ export default function Botonera({producto}) {
         <button type="button" className="btn btn-primary" onClick={sumar}>+</button>
         <span>Cantidad Elegida {cantidad}</span>
         <button type="button" className="btn btn-primary" onClick={restar}>-</button>
-        
-        
     </div>
   )
 }
