@@ -3,7 +3,8 @@ import { consultarCarrito } from "../../api/apiCarritos"
 import Cookies from "js-cookie"
 import toast from "react-hot-toast"
 import { ProductosCart } from "../../components/ProductosCart"
-import { agregarProductoCarrito } from '../../api/apiCarritos';
+import { agregarProductoCarrito, eliminarCarrito } from '../../api/apiCarritos';
+import { crearPedido } from "../../api/apiPedidos"
 export function Cart() {
   const [token, setToken]=useState(null)
   const [productos,setProductos]=useState([])
@@ -57,7 +58,21 @@ export function Cart() {
       toast.error("Error al actualizar la cantidad del producto");
     }
   };
-
+  const finalizarPedido= async ()=>{
+    const response = await crearPedido(token)
+    console.log(response.data)
+    toast.success("Pedido creado correctamente")
+    setTimeout(()=>{
+      window.location.href = "/cliente"
+    },2000)
+  }
+  const limpiarCarrito=async ()=>{
+    const response = await eliminarCarrito(token)
+    console.log(response.data)
+    toast.success("Carrito eliminado correctamente")
+    
+      
+  }
   return (
     <>
       <div>
@@ -74,7 +89,9 @@ export function Cart() {
                     <ProductosCart key={producto.id_producto} producto={producto} actualizarTotal={actualizarTotal} />
                   ))}
                 </ul>
-                <h1>Total:$ {total} pesos</h1>
+                <h1>Total:$ {Number(total).toFixed(2)} pesos</h1>
+                <button type="button" className="btn btn-primary" onClick={finalizarPedido}>Finalizar Pedido</button>
+                <button type="button" className="btn btn-danger" onClick={limpiarCarrito}>Borrar Carrito</button>
               </>
             ) : (
               <h2>No hay productos en el carrito</h2>

@@ -1,4 +1,5 @@
 from django.contrib.auth.hashers import make_password, check_password
+from django.core.mail import send_mail
 from rest_framework import viewsets
 from .serializer import ClienteSerializer
 from .models import Cliente
@@ -9,6 +10,7 @@ from django.conf import settings
 from django.http import JsonResponse, HttpResponse
 from datetime import datetime, timedelta
 from .decorators import token_required
+from decouple import config
 class ClienteView(viewsets.ModelViewSet):
     serializer_class = ClienteSerializer
     queryset = Cliente.objects.all()
@@ -16,10 +18,9 @@ class ClienteView(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
     # Obtén los datos del cliente desde la solicitud
         serializer = self.get_serializer(data=request.data)
-    
-    # Valida y guarda los datos del cliente si son válidos
         if serializer.is_valid():
             serializer.save()
+            self.enviar_correo(serializer.data)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -29,14 +30,13 @@ class ClienteView(viewsets.ModelViewSet):
         user_id = request.user_id
         try:
             user = Cliente.objects.get(id=user_id)
-            return JsonResponse({'message': 'Información del usuario', 'id': user.id,"nombre":user.nombre, 'correo': user.correo})
+            return JsonResponse({'message': 'Información del usuario', 'id': user.id,"nombre":user.nombre,'apellido':user.apellido,'telefono':user.telefono, 'correo': user.correo})
         except Cliente.DoesNotExist:
             return JsonResponse({'message': 'Usuario no encontrado'}, status=404)
 
     def login(self, request):
         email = request.data.get('correo')
         password = request.data.get('contraseña')
-        print(request.data.get('correo'))
         try:
             user = Cliente.objects.get(correo=email)
             if check_password(password, user.contraseña):
@@ -44,8 +44,15 @@ class ClienteView(viewsets.ModelViewSet):
                 token_payload = {'user_id': user.id, 'username': user.correo,'exp': datetime.utcnow() + timedelta(hours=1) }
                 token = jwt.encode(token_payload, settings.SECRET_KEY, algorithm='HS256')
                 token_str = token
-                return JsonResponse({'token': token_str, 'message': 'Inicio de sesión exitoso'})
+                return JsonResponse({'token': token_str.decode('utf-8'), 'message': 'Inicio de sesión exitoso'})
         except Cliente.DoesNotExist:
             pass 
 
         return JsonResponse({'message': 'Login fallido'}, status=401)
+    def enviar_correo(self,cliente):
+        subject = 'Bienvenido a Papel & Mas'
+        message = f'Hola {cliente["nombre"]},\n\n Gracias por registrarte en nuestra Pagina web, ahora puedes agregar productos al carrito y realizar pedidos'
+        from_email = config('EMAIL_HOST_USER')
+        recipient_list = [cliente['correo']]
+        password = config("EMAIL_HOST_PASSWORD")
+        send_mail(subject, message, from_email, recipient_list, auth_user=config('EMAIL_HOST_USER'), auth_password=password)

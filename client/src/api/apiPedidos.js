@@ -11,5 +11,5 @@ export const consultarPedidos = (token)=>{
 }
 
 export const crearPedido = (token)=>{
-    return apiPedidos.post('finalizarPedido/',{headers:{Authorization:`Bearer ${token}`}});
+    return apiPedidos.get('finalizarPedido/',{headers:{Authorization:`Bearer ${token}`}});
 }

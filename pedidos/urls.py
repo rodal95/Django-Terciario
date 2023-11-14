@@ -5,6 +5,6 @@ from pedidos import views
 
 urlpatterns = [
     path('pedidosId/', views.PedidoViews.as_view({'get': 'pedidos'})),
-    path('finalizarPedido/', views.PedidoViews.as_view({'post': 'finalizarPedido'})),
+    path('finalizarPedido/', views.PedidoViews.as_view({'get': 'finalizarPedido'})),
 
 ]

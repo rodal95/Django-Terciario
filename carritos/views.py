@@ -15,8 +15,9 @@ class CarritoView(viewsets.ViewSet):
 
         data = []
         for producto in productos:
-            data.append({'id_producto': producto.producto_id, 'precio': producto.precio_producto,'cantidad':producto.cantidad_elegida_producto,'subtotal':producto.subtotal})
+            data.append({'id_producto': producto.producto_id,'nombre':producto.producto_nombre, 'precio': producto.precio_producto,'cantidad':producto.cantidad_elegida_producto,'subtotal':producto.subtotal})
         return JsonResponse(data, safe=False)
+
     @token_required
     def agregar_o_actualizar_carrito(self,request):
         if request.method == 'POST':
@@ -32,3 +33,10 @@ class CarritoView(viewsets.ViewSet):
                 return JsonResponse({'message': 'Error: ' + str(e)}, status=400)
         else:
             return JsonResponse({'message': 'Método no permitido'}, status=405)
+
+    @token_required
+    def limpiar_carrito(self, request):
+        user_id = request.user_id
+        carritos_abiertos = Carrito.objects.filter(cliente_id=user_id, abierto=1)
+        CarritoProducto.objects.filter(carrito_id=carritos_abiertos.first().id).delete()
+        return JsonResponse({'message': True})

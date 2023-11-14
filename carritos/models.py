@@ -13,9 +13,10 @@ class Carrito(models.Model):
 class CarritoProducto(models.Model):
     carrito = models.ForeignKey(Carrito, on_delete=models.CASCADE)
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
-    precio_producto = models.PositiveIntegerField()
+    producto_nombre = models.CharField(max_length=255)
+    precio_producto = models.DecimalField(max_digits=10, decimal_places=2)
     cantidad_elegida_producto = models.IntegerField()
-    subtotal = models.IntegerField()
+    subtotal = models.DecimalField(max_digits=10, decimal_places=2)
     imagen = models.CharField(max_length=500 , default='')
 
     def __str__(self):

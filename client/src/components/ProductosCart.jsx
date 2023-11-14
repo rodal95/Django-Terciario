@@ -48,16 +48,16 @@ export function ProductosCart({producto, actualizarTotal}) {
                 </thead>
                 <tbody>
                     <tr>
-                        <td>{producto.id_producto}</td>
+                        <td>{producto.nombre}</td>
                         <td>{producto.precio}</td>
                         <td>
                             {cantidad}
                         </td>
-                        <td>{producto.precio * cantidad}</td>
+                        <td>{producto.subtotal}</td>
                         <td>
                             <button type="button" className="btn btn-primary" onClick={sumarCantidad}>+</button>
                             <button type="button" className="btn btn-primary" onClick={restarCantidad}>-</button>
-                            <button type="button" className="btn btn-primary" onClick={eliminarProducto}>Eliminar</button>
+                            <button type="button" className="btn btn-danger" onClick={eliminarProducto}>Eliminar</button>
                         </td>
                     </tr>
                 </tbody>

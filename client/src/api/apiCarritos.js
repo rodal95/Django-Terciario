@@ -14,3 +14,6 @@ export const consultarCarrito = (token)=>{
     return apiCarritos.get('carritosId/',{headers:{Authorization:`Bearer ${token}`}}) 
 }
 
+export const eliminarCarrito = (token)=>{
+  return apiCarritos.get('eliminarCarrito/',{headers:{Authorization:`Bearer ${token}`}})
+}

@@ -3,11 +3,26 @@ import React from 'react'
 export default function UserData({cliente}) {
   return (
     <div>
-        <h1>Datos de usuario</h1>
-        <h2>Nombre: {cliente.nombre}</h2>
-        <h2>Apellido: {cliente.apellido}</h2>
-        <h2>Correo: {cliente.correo}</h2>
-        <h2>Telefono: {cliente.telefono}</h2>
+      <table className='table'>
+        <tbody className="table-group-divider">
+          <tr>
+            <td>Nombre:</td>
+            <td>{cliente.nombre}</td>
+          </tr>
+          <tr>
+            <td>Apellido:</td>
+            <td>{cliente.apellido}</td>
+          </tr>
+          <tr>
+            <td>Correo:</td>
+            <td>{cliente.correo}</td>
+          </tr>
+          <tr>
+            <td>Telefono:</td>
+            <td>{cliente.telefono}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   )
 }
