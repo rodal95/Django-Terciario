@@ -25,7 +25,7 @@ export function Login() {
       // Realizar otras acciones después de guardar la cookie, como redirigir al usuario a una página de inicio
     }
   }
-
+  
     
 
 
@@ -44,6 +44,7 @@ export function Login() {
           {errors.contraseña && <span>This field is required</span>}
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
+        <button class="btn btn-primary" onClick={()=>window.location.href = "/registrarse"}>Registrarse</button>
       </form>
     </div>
   )

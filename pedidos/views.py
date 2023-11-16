@@ -33,6 +33,7 @@ class PedidoViews(viewsets.ModelViewSet):
                 with connections['default'].cursor() as cursor:
                     cursor.execute(query, (user_id,))
                 cliente = Cliente.objects.get(id=user_id)
+                print(cliente)
                 
                 self.enviar_correo(cliente)
                 return JsonResponse({'message': True})
@@ -42,7 +43,7 @@ class PedidoViews(viewsets.ModelViewSet):
             return JsonResponse({'message': 'Método no permitido'}, status=405)
     def enviar_correo(self,cliente):
         subject = 'Bienvenido a Papel & Mas'
-        message = f'Hola {cliente["nombre"]},\n\n Tu pedido fue realizado con exito.\n\n Por favor entra a tu usuario y consulta tus pedidos realizados'
+        message = f'Hola {cliente.nombre},\n\n Tu pedido fue realizado con exito.\n\n Por favor entra a tu usuario y consulta tus pedidos realizados'
         from_email = config('EMAIL_HOST_USER')
         recipient_list = [cliente.correo]
         password = config("EMAIL_HOST_PASSWORD")
