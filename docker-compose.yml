@@ -1,4 +1,7 @@
 version: '3'
+networks:
+  project:
+    driver: bridge
 
 services:
   app:
@@ -25,13 +28,18 @@ services:
     depends_on:
       - mysql
     networks:
-      default:  # Conectando a la red default
+      - project  # Conectando a la red default
+
   mysql:
-    container_name: some-mysql
+    container_name: projectMysql
     image: mysql:latest
     environment:
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DBNAME}
+    restart: always
     ports:
       - "3306:3306"
+    volumes:
+      - ~/mysql-data:/var/lib/mysql
     networks:
-      - default 
+      - project 
