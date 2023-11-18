@@ -30,8 +30,5 @@ jobs:
 
     - name: Run Docker Compose build
       run: |    
-        ssh ubuntu@52.90.101.20 "cd ~/Django-Terciario && sudo docker-compose up --build app -d "   
+        ssh ubuntu@52.90.101.20 "cd ~/Django-Terciario && sudo docker-compose up --build -d "   
 
-    - name: Run Docker Compose up
-      run: |    
-        ssh ubuntu@52.90.101.20 "cd ~/Django-Terciario && sudo docker-compose restart app"
