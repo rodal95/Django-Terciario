@@ -1,7 +1,4 @@
 version: '3'
-networks:
-  project-network:
-    driver: bridge
 
 services:
   app:
@@ -28,7 +25,7 @@ services:
     depends_on:
       - mysql
     networks:
-      - project-network
+      default:  # Conectando a la red default
   mysql:
     container_name: some-mysql
     image: mysql:latest
@@ -37,4 +34,4 @@ services:
     ports:
       - "3306:3306"
     networks:
-      - project-network
+      - default 
