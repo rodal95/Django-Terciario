@@ -22,15 +22,7 @@ jobs:
 
     - name: Pull from Haloserver
       run: |
-        ssh ubuntu@52.90.101.20 "cd ~/Django-Terciario && git pull origin main"
-
-    - name: Install react dependencies
-      run: |
-        ssh ubuntu@52.90.101.20 "cd ~/Django-Terciario/client && npm i"  
-
-    - name: Run build dependencies
-      run: |
-          ssh ubuntu@52.90.101.20 "cd ~/Django-Terciario/client && npm run build"    
+        ssh ubuntu@52.90.101.20 "cd ~/Django-Terciario && git pull origin main" 
 
     - name: Run Docker prune
       run: |    
