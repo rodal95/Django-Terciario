@@ -9,5 +9,5 @@ urlpatterns = [
 
     path('consultar/', views.ClienteView.as_view({'get': 'consultar'}), name='cliente-consultar'),
 
-    path('login/', views.ClienteView.as_view({'post': 'login'}), name='cliente-login'),
+    path('loguearse/', views.ClienteView.as_view({'post': 'login'}), name='cliente-login'),
 ]

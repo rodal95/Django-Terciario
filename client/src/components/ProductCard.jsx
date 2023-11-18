@@ -11,7 +11,7 @@ export function ProductCard({ producto }) {
         <div className="card-body">
           <h5 className="card-title">{producto.nombre}</h5>
           <h5>Precio ${producto.precio}</h5>
-          <a href={`/producto/${producto.id_producto}`} className="btn btn-primary">
+          <a href={`/detalle/${producto.id_producto}`} className="btn btn-primary">
             Ver Producto
           </a>
         </div>

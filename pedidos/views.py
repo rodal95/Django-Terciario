@@ -42,7 +42,7 @@ class PedidoViews(viewsets.ModelViewSet):
         else:
             return JsonResponse({'message': 'Método no permitido'}, status=405)
     def enviar_correo(self,cliente):
-        subject = 'Bienvenido a Papel & Mas'
+        subject = 'Nuevo pedido realizado'
         message = f'Hola {cliente.nombre},\n\n Tu pedido fue realizado con exito.\n\n Por favor entra a tu usuario y consulta tus pedidos realizados'
         from_email = config('EMAIL_HOST_USER')
         recipient_list = [cliente.correo]

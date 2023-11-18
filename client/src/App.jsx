@@ -18,11 +18,11 @@ export default function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home/>}/>
-          <Route path='/cliente' element={<User/>}/>
+          <Route path='/cliente' element={<Login/>}/>
           <Route path='/carrito' element={<Cart/>}/>
-          <Route path='/login' element={<Login/>}/>
+          <Route path='/clienteLog' element={<User/>}/>
           <Route path='/registrarse' element={<Register/>}/>
-          <Route path='/producto/:id' element={<ProductDetail/>}/>
+          <Route path='/detalle/:id' element={<ProductDetail/>}/>
         </Routes>
         <Toaster/>
       </BrowserRouter>

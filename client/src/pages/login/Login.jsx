@@ -19,7 +19,7 @@ export function Login() {
       Cookies.set('access_token', response.data.token, { expires: 1 / 24 }); // Duración de 1 hora (1/24 de un día)
       toast("Logueo exitoso")
       setTimeout(()=>{
-        window.location.href = "/cliente"
+        window.location.href = "/clienteLog"
       },2000)
 
       // Realizar otras acciones después de guardar la cookie, como redirigir al usuario a una página de inicio

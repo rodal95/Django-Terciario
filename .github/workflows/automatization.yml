@@ -1,0 +1,45 @@
+name: Auto Pull on Push
+
+on:
+  push:
+    branches:
+      - main  # Cambia 'main' por la rama en la que estás trabajando
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: SSH Setup
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY_SERVER }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan 52.90.101.20 >> ~/.ssh/known_hosts
+
+    - name: Pull from Haloserver
+      run: |
+        ssh ubuntu@52.90.101.20 "cd ~/Django-Terciario && git pull origin main"
+
+    - name: Install react dependencies
+      run: |
+        ssh ubuntu@52.90.101.20 "cd ~/Django-Terciario/client && npm i"  
+
+    - name: Run build dependencies
+      run: |
+          ssh ubuntu@52.90.101.20 "cd ~/Django-Terciario/client && npm run build"    
+
+    - name: Run Docker prune
+      run: |    
+          ssh ubuntu@52.90.101.20 "docker system prune -f"   
+
+    - name: Run Docker Compose build
+      run: |    
+        ssh ubuntu@52.90.101.20 "cd ~/Django-Terciario && sudo docker-compose up --build app -d "   
+
+    - name: Run Docker Compose up
+      run: |    
+        ssh ubuntu@52.90.101.20 "cd ~/Django-Terciario && sudo docker-compose restart app"

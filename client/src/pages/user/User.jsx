@@ -17,7 +17,7 @@ export  function User() {
           traerPedidos()
       }else{
         setTimeout(()=>{
-          window.location.href = "/login"
+          window.location.href = "/cliente"
         },2000)
       }
   }
