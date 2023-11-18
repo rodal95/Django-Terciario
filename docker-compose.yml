@@ -6,7 +6,7 @@ networks:
 services:
   app:
     build:
-      context: ./Django-Terciario
+      context: .
       dockerfile: Dockerfile
     container_name: app
     ports:
