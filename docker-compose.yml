@@ -39,7 +39,5 @@ services:
     restart: always
     ports:
       - "3306:3306"
-    volumes:
-      - ~/mysql-data:/var/lib/mysql
     networks:
       - project 
