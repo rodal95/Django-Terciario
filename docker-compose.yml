@@ -26,7 +26,7 @@ services:
       EMAIL_HOST_PASSWORD: ${EMAIL_HOST_PASSWORD}
       SECRET_KEY: ${SECRET_KEY}
     depends_on:
-      - some-mysql
+      - mysql
     networks:
       - project-network
   mysql:
