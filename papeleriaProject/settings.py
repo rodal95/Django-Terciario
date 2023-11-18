@@ -14,7 +14,7 @@ SECRET_KEY = config("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['52.90.101.20']
+ALLOWED_HOSTS = ['52.90.101.20', '127.0.0.1', 'localhost']
 
 # Application definition
 INSTALLED_APPS = [
@@ -103,11 +103,13 @@ USE_I18N = True
 
 USE_TZ = True
 
-STATICFILES_DIRS=[
-    os.path.join(BASE_DIR,'client/build')
+STATIC_URL = '/static/'
+# Rutas donde Django buscará archivos estáticos
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'client/build/')
 ]
 
-STATIC_URL = 'assets/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -115,7 +117,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOW_CREDENTIALS = True
-
 
 
 REST_FRAMEWORK={
