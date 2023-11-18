@@ -37,4 +37,4 @@ services:
     ports:
       - "3306:3306"
     networks:
-      - my-network
+      - project-network
