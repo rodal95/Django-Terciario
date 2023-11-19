@@ -2,7 +2,7 @@ import os
 from pathlib import Path
 from decouple import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # Quick-start development settings - unsuitable for production
@@ -14,7 +14,7 @@ SECRET_KEY = config("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['52.90.101.20', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 INSTALLED_APPS = [
@@ -52,7 +52,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR,'client/build')
+             os.path.join(BASE_DIR, 'frontend', 'build')
             ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -76,7 +76,6 @@ DATABASES = {
         'PASSWORD': config('MYSQL_PASSWORD'),
         'HOST':config('MYSQL_HOST'),
         'PORT':config('MYSQL_PORT'),
-        
     }
 }
 
@@ -103,20 +102,23 @@ USE_I18N = True
 
 USE_TZ = True
 
+# Establecer la ruta de archivos estáticos
 STATIC_URL = '/static/'
-# Rutas donde Django buscará archivos estáticos
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Carpeta para archivos estáticos generados
+
+# Configurar las rutas para los archivos estáticos de React
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'client/build/')
+     os.path.join(BASE_DIR, 'frontend', 'build', 'static'),   # Ruta a la carpeta 'static' dentro de 'build'
 ]
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
 
 CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOWED_HEADERS = ['*']
 
 
 REST_FRAMEWORK={
