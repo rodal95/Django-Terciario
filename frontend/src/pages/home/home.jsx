@@ -15,6 +15,7 @@ export function Home() {
 
   return (
     <div>
+      <h1>Un cambio</h1>
       {productos ? <ProductList productos = {productos}/> : (
         <h1>Cargando...</h1>
       )}
