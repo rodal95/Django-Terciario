@@ -102,46 +102,22 @@ USE_I18N = True
 
 USE_TZ = True
 
-<<<<<<< HEAD
-# Establecer la ruta de archivos estáticos
 STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Carpeta para archivos estáticos generados
 
 # Configurar las rutas para los archivos estáticos de React
 STATICFILES_DIRS = [
-     os.path.join(BASE_DIR, 'frontend', 'build', 'static'),   # Ruta a la carpeta 'static' dentro de 'build'
+    os.path.join(BASE_DIR, 'client/build/')
 ]
 
-=======
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-
-# Establecer la ruta de archivos estáticos
-STATIC_URL = '/static/'
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Carpeta para archivos estáticos generados
-
-# Configurar las rutas para los archivos estáticos de React
-STATICFILES_DIRS = [
-     os.path.join(BASE_DIR, 'frontend', 'build', 'static'),   # Ruta a la carpeta 'static' dentro de 'build'
-]
-
->>>>>>> 7b774792c2565cd8af95d8885cd936a54e06a23f
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOW_CREDENTIALS = True
-
-<<<<<<< HEAD
-CORS_ALLOWED_HEADERS = ['*']
-=======
-CORS_ALLOWED_HEADERS = [  # Agrega las cabeceras que deseas permitir
-    'Authorization',
-    'Content-Type',
-    # Otras cabeceras permitidas
-]
->>>>>>> 7b774792c2565cd8af95d8885cd936a54e06a23f
 
 
 REST_FRAMEWORK={
