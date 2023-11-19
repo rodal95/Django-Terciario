@@ -5,7 +5,6 @@ import Cookies from "js-cookie"
 const csrftoken = Cookies.get('csrftoken')
 
 const backendUrl = process.env.REACT_APP_URL_BACKEND
-console.log(backendUrl)
 // Crea una instancia de Axios con la URL base
 const apiCarritos = axios.create({
   baseURL: backendUrl

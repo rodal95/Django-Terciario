@@ -1,13 +1,10 @@
 // Importa la librería Axios
 import axios from 'axios';
 const backendUrl = process.env.REACT_APP_URL_BACKEND
-console.log(backendUrl)
+
 // Crea una instancia de Axios con la URL base
 const apiPedidos = axios.create({
-  baseURL: backendUrl,
-  timeout: 10000,
-  headers: {'Content-Type': 'application/json'}
-  
+  baseURL: backendUrl,  
 });
 
 export const consultarPedidos = (token)=>{

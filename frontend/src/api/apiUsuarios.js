@@ -5,7 +5,6 @@ import Cookies from "js-cookie"
 
 const backendUrl = process.env.REACT_APP_URL_BACKEND
 
-console.log(backendUrl)
 const csrftoken = Cookies.get('csrftoken')
 
 const apiUsuarios = axios.create({

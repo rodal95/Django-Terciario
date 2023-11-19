@@ -5,8 +5,6 @@ const backendUrl = process.env.REACT_APP_URL_BACKEND
 // Crea una instancia de Axios con la URL base
 const apiProductos = axios.create({
     baseURL: backendUrl,
-    timeout: 10000,
-    headers: {'Content-Type': 'application/json'}
 });
 
 export const consultarProductos = ()=>{
