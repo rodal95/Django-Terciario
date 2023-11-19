@@ -1,5 +1,5 @@
-import React from 'react'
-import { set, useForm } from "react-hook-form"
+import React,{useEffect} from 'react'
+import { useForm } from "react-hook-form"
 import { loginCliente } from '../../api/apiUsuarios';
 import Cookies from "js-cookie"
 import toast from 'react-hot-toast';
@@ -7,28 +7,29 @@ import toast from 'react-hot-toast';
 
 export function Login() {
   const { register, handleSubmit, formState: { errors } } = useForm();
+  useEffect(() => {
+    const token = Cookies.get('access_token');
+    if (token) {
+      window.location.href = "/clienteLog";
+    }
+  }, []);
   const onSubmit = handleSubmit((data) => {
     Logueo(data)
   });
   async function Logueo(data){
     const datos = {'correo':data.correo,'contraseña':data.contraseña}
-
     const response = await loginCliente(datos)
     if (response.data.token) {
-      // Almacenar el token en una cookie
-      Cookies.set('access_token', response.data.token, { expires: 1 / 24 }); // Duración de 1 hora (1/24 de un día)
+      Cookies.set('access_token', response.data.token, { expires: 1 / 24 });
       toast("Logueo exitoso")
       setTimeout(()=>{
         window.location.href = "/clienteLog"
       },2000)
 
-      // Realizar otras acciones después de guardar la cookie, como redirigir al usuario a una página de inicio
+
     }
   }
   
-    
-
-
   return (
     <div>
       <h1>Login</h1>

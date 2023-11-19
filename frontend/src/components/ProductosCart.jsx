@@ -26,9 +26,9 @@ export function ProductosCart({producto, actualizarTotal}) {
           actualizarTotal(producto.id_producto, -1);
         } else {
           toast.error("La cantidad mínima es 1");
+          setCantidad(1)
         }
       };
-
       const eliminarProducto = async () => {
         actualizarTotal(producto.id_producto, -producto.cantidad);
       };

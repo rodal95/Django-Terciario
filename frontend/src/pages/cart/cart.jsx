@@ -17,11 +17,9 @@ export function Cart() {
           setToken(tokenCookie)
           ObtenerProductos(tokenCookie)
       }else{
-        toast("recuerda loguearte para ver tu carrito")
         setTimeout(()=>{
-          window.location.href = "/"
+          window.location.href = "/cliente"
         },2000)
-
       }
   }
   ,[])
@@ -63,15 +61,16 @@ export function Cart() {
     console.log(response.data)
     toast.success("Pedido creado correctamente")
     setTimeout(()=>{
-      window.location.href = "/cliente"
+      window.location.href = "/clienteLog"
     },2000)
   }
   const limpiarCarrito=async ()=>{
     const response = await eliminarCarrito(token)
     console.log(response.data)
     toast.success("Carrito eliminado correctamente")
-    
-      
+    setTimeout(()=>{
+      window.location.href = "/clienteLog"
+    },2000)
   }
   return (
     <>
@@ -98,7 +97,7 @@ export function Cart() {
             )}
           </>
         ) : (
-          <h2>Recuerda iniciar sesión para ver tu carrito</h2>
+          <h2>Recuerda iniciar sesión para ver tu carrito{toast("Recuerda loguearte para ver tu carrito")}</h2>
         )}
       </div>
     </>
