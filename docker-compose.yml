@@ -25,6 +25,7 @@ services:
       EMAIL_HOST_USER: ${EMAIL_HOST_USER}
       EMAIL_HOST_PASSWORD: ${EMAIL_HOST_PASSWORD}
       SECRET_KEY: ${SECRET_KEY}
+      REACT_APP_URL_BACKEND: ${REACT_APP_URL_BACKEND}
     depends_on:
       - mysql
     networks:

@@ -2,7 +2,7 @@ import os
 from pathlib import Path
 from decouple import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # Quick-start development settings - unsuitable for production
@@ -52,7 +52,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR,'client/build')
+             os.path.join(BASE_DIR, 'frontend', 'build')
             ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -103,13 +103,17 @@ USE_I18N = True
 
 USE_TZ = True
 
-STATIC_URL = '/static/'
-# Rutas donde Django buscará archivos estáticos
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'client/build/')
-]
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+# Establecer la ruta de archivos estáticos
+STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Carpeta para archivos estáticos generados
+
+# Configurar las rutas para los archivos estáticos de React
+STATICFILES_DIRS = [
+     os.path.join(BASE_DIR, 'frontend', 'build', 'static'),   # Ruta a la carpeta 'static' dentro de 'build'
+]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
