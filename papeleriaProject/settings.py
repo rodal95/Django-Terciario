@@ -122,6 +122,12 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOW_CREDENTIALS = True
 
+CORS_ALLOWED_HEADERS = [  # Agrega las cabeceras que deseas permitir
+    'Authorization',
+    'Content-Type',
+    # Otras cabeceras permitidas
+]
+
 
 REST_FRAMEWORK={
     'DEFAULT_SCHEMA_CLASS':'rest_framework.schemas.coreapi.AutoSchema',
