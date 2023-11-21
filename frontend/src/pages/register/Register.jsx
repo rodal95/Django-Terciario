@@ -19,7 +19,7 @@ export function Register() {
     toast.success("Registro exitoso")
     setTimeout(()=>{
       window.location.href="/cliente"
-    })
+    },1500)
     
   }
 
