@@ -15,9 +15,12 @@ export function Register() {
     }
   };
   async function registrarCliente(data){
-    const response = await crearClientes(data)
+    await crearClientes(data)
     toast.success("Registro exitoso")
-    window.location.href="/login"
+    setTimeout(()=>{
+      window.location.href="/cliente"
+    })
+    
   }
 
   return (
