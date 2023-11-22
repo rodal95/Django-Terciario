@@ -18,3 +18,7 @@ export const consultarProducto = (id)=>{
 export const consultarProductoCategoria = (categoria)=>{
     return apiProductos.get(`api/productos/getByCategory/${categoria}`);
 }
+
+export const consultarCategorias = ()=>{
+    return apiProductos.get("api/productos/getCategory/");
+}

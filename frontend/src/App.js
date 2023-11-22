@@ -8,7 +8,7 @@ import ProductDetail from './pages/productDetail/ProductDetail'
 import {Toaster} from 'react-hot-toast'
 import { Register } from './pages/register/Register'
 import { Home } from './pages/home/home'
-
+import { Footer } from './components/Footer';
 function App() {
   return (
     <div className="App">
@@ -22,6 +22,7 @@ function App() {
           <Route path='/registrarse' element={<Register/>}/>
           <Route path='/detalle/:id' element={<ProductDetail/>}/>
         </Routes>
+        <Footer/>
         <Toaster/>
       </BrowserRouter>
     </div>

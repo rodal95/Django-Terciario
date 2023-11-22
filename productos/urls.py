@@ -8,4 +8,5 @@ urlpatterns = [
     path('all/', views.ProductoView.as_view({'get': 'getAll'})),
     path('getById/<int:id>/', views.ProductoView.as_view({'get': 'getById'})),
     path('getByCategory/<int:category>/', views.ProductoView.as_view({'get': 'getByCategory'})),
+    path('getCategory/', views.ProductoView.as_view({'get': 'getCategory'})),
 ]

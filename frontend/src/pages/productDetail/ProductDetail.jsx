@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { consultarProducto } from '../../api/apiProductos'
 import Botonera from '../../components/Botonera'
+import { ProductCategory } from '../../components/ProductCategory'
+
 export default function ProductDetail() {
     const [producto,setProducto] = useState()
     const params = useParams()
@@ -24,6 +26,7 @@ export default function ProductDetail() {
                 <h2>${producto.precio}</h2>
                 <p>{producto.descripcion}</p>
                 <Botonera producto={producto}/>
+                <ProductCategory producto={producto}/>
             </div>
 
         ) : (

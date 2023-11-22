@@ -1,0 +1,13 @@
+.productosRelacionados{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    
+}
+.productosRelacionados a{
+    text-decoration: none;
+    color: black;
+}
