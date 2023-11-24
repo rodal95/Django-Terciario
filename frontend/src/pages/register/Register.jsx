@@ -26,6 +26,7 @@ export function Register() {
 
   return (
     <div className='container-form-signup'>
+      <h1>Registro</h1>
       <form onSubmit={handleSubmit(onSubmit)} className='form-signup'>
         <div>
           <label className="form-control form-control-lg" htmlFor="firstName">Nombre</label>

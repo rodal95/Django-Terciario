@@ -4,7 +4,7 @@ export function Navbar() {
   return (
     <div>
         <nav className="navbar navbar-expand-lg bg-custom-color">
-        <a className="navbar-brand" href="/"><img src="https://i.imgur.com/5qQjrSv.png" alt="" className='logo-footer'/></a>
+        <a className="navbar-brand" href="/"><img src="https://i.imgur.com/5qQjrSv.png" alt="" className='logo'/></a>
             <div className="container-fluid">
                 
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

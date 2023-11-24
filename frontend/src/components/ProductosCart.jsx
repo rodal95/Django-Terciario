@@ -1,6 +1,6 @@
 import { useState,useEffect } from 'react';
 import { toast } from 'react-hot-toast';
-
+import "./ProductosCart.css"
 import Cookies from 'js-cookie';
 
 export function ProductosCart({producto, actualizarTotal}) {
@@ -35,13 +35,14 @@ export function ProductosCart({producto, actualizarTotal}) {
 
     return (
         <>
-        {producto ? <div>
+        {producto ? 
+        <div className='ProductosCart'>
             <table className="table">
                 <thead>
                     <tr>
-                        <th>Producto</th>
-                        <th>Precio</th>
-                        <th>Cantidad</th>
+                        <th>Item</th>
+                        <th>$$</th>
+                        <th>Cant.</th>
                         <th>Subtotal</th>
                         <th>Acciones</th>
                     </tr>

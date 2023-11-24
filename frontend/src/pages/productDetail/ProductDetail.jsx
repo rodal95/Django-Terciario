@@ -24,7 +24,7 @@ export default function ProductDetail() {
             <div>
                 <div className='productDetail'>
                     <div>
-                        <img src={producto.imagen} alt={producto.nombre} width="300px"/>
+                        <img src={producto.imagen} alt={producto.nombre} width="200px"/>
                     </div>
                     <div>
                         <h1>{producto.nombre}</h1>

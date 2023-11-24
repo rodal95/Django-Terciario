@@ -1,22 +1,22 @@
 .container-form-signup{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     background-color: white;
-    width: 80%;
-    margin: 25px 25px;
+    width: 100%;
     padding: 20px 20px;
+    @media screen and (min-width: 768px){
+        width: 80%;
+        margin: 0 auto;
+        
+    }
 }
 .form-signup{
-
-    margin-left: 25px;
-    margin-right: 25px;
     align-items: center;
-    width: 80%;
+    width: 100%;
     border: 1px solid #000000;
     border-radius: 10px;
     text-align: left;
+    padding: 10px;
 
 }
 .form-signup input{

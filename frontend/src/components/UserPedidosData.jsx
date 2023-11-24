@@ -1,5 +1,5 @@
 import React from 'react'
-
+import "./UserPedidosData.css"
 
 
 export default function UserPedidosData({pedidos}) {
@@ -18,19 +18,21 @@ export default function UserPedidosData({pedidos}) {
             </h2>
             <div id={`collapse-${pedidoIndex}`} class="accordion-collapse collapse" data-bs-parent={`#accordionExample${pedidoIndex}`}>
               <div class="accordion-body">
-                <table className='table'>
+                <table className='table-pedidos'>
                   <thead>
                     <tr>
-                      <th>Producto</th>
-                      <th>Cantidad</th>
-                      <th>Precio Unitario</th>
+                      <th>Item</th>
+                      <th>Cant.</th>
+                      <th>Precio</th>
                       <th>SubTotal</th>
                     </tr>
                   </thead>
                   <tbody className="table-group-divider"> 
                     {pedido.productos.map((producto, productoIndex) => (
                       <tr key={`${pedidoIndex}-${productoIndex}-${producto.id_producto}`}>
-                        <td>{producto.nombre}</td>
+                        <td>
+                          <div >{producto.nombre}</div>
+                        </td>
                         <td>{producto.cantidad}</td>
                         <td>{producto.precio}</td>
                         <td>{producto.subtotal}</td>
