@@ -49,11 +49,23 @@ export  function User() {
           <UserData cliente={cliente}/>
         </div>
         <div className="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
-          {pedidos ? <UserPedidosData pedidos={pedidos}/>:<h1>No hay pedidos realizados</h1>}
+
+          {pedidos ? <UserPedidosData pedidos={pedidos}/>: 
+          <div style={{height:"500px"}}>
+                <button class="btn btn-primary" type="button" disabled>
+                    <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                    <span role="status">Cargando, aguarde por favor...</span>
+                </button>
+            </div>}
           
         </div>
 
-      </div></>:<h1>Cargando</h1>}
+      </div></>: <div style={{height:"500px"}}>
+                  <button class="btn btn-primary" type="button" disabled>
+                    <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                    <span role="status">Cargando, aguarde por favor...</span>
+                </button>
+            </div>}
     </div>) :  <h1>Recuerda loguearte para acceder a tu usuario</h1>}
     </>
   )

@@ -1,4 +1,4 @@
-import React,{useDebugValue, useEffect, useState} from 'react'
+import React,{ useEffect, useState} from 'react'
 import { consultarProductoCategoria } from '../api/apiProductos'
 import { Link } from 'react-router-dom'
 import "./ProductCategory.css"
@@ -20,21 +20,30 @@ export function ProductCategory({ producto }) {
 
   return (
     <div >
-        <h2>Productos Relacionados</h2>
+        <div className='tituloProductoCategoria'>
+            <h2>Tambien te puede interesar</h2>
+        </div>
+
         {productosRelacionados.length > 0 ? (
             <div className='productosRelacionados'>
             {productosRelacionados.map((prod) => (
-                <div key={prod.id_producto}>
+                <div key={prod.id_producto} className='eachProduct'>
                     <Link to={`/detalle/${prod.id_producto}`}>
-                    <img src={prod.imagen} alt={prod.nombre} width="150px" />
-                    <h4>{prod.nombre}</h4>
-                    <h4>${prod.precio}</h4>
+                    <img src={prod.imagen} alt={prod.nombre} />
+                    <h6>{prod.nombre}</h6>
+                    <h6>${prod.precio}</h6>
                     </Link>
                 </div>
             ))}
             </div>
         ) : (
-            <h2>Cargando...</h2>
+            <>
+                <button class="btn btn-primary" type="button" disabled>
+                    <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                    <span role="status">Cargando, aguarde por favor...</span>
+                </button>
+            
+            </>
         )}
     </div>
   )

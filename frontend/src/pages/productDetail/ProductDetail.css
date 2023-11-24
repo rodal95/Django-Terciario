@@ -1,0 +1,13 @@
+.productDetail{
+    background-color: white;
+    margin: 25px 10px 10px 10px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+    text-align: left;
+    align-items: center;
+}
+.productDetail img{
+    margin: 10px;
+}

@@ -2,15 +2,17 @@ import React from 'react';
 
 export function ProductCard({ producto }) {
   const cardStyle = {
-    width: '18rem',
+    width: '300px',
+    height: '400px',
+    margin: '10px',
   };
   return (
     <div key={producto.id}>
       <div className="card" style={cardStyle}>
-        <img  src={producto.imagen}/>
+        <img  src={producto.imagen} alt=""/>
         <div className="card-body">
-          <h5 className="card-title">{producto.nombre}</h5>
-          <h5>Precio ${producto.precio}</h5>
+          <h6 className="card-title">{producto.nombre}</h6>
+          <h6>${producto.precio}</h6>
           <a href={`/detalle/${producto.id_producto}`} className="btn btn-primary">
             Ver Producto
           </a>

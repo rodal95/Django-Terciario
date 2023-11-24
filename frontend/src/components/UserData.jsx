@@ -1,6 +1,15 @@
 import React from 'react'
+import Cookies from "js-cookie"
+import toast from 'react-hot-toast';
 
 export default function UserData({cliente}) {
+  const deslogueo = ()=>{
+    Cookies.remove('access_token')
+    toast("Deslogueo exitoso")
+    setTimeout(()=>{
+      window.location.href = "/cliente"
+    },1500)    
+  }
   return (
     <div>
       <table className='table'>
@@ -23,6 +32,7 @@ export default function UserData({cliente}) {
           </tr>
         </tbody>
       </table>
+      <button type="button" class="btn btn-primary" onClick={()=>{deslogueo()}}>Salir</button>
     </div>
   )
 }
