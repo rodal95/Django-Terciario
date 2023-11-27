@@ -8,6 +8,7 @@ urlpatterns = [
     path('clienteLog', TemplateView.as_view(template_name='index.html')),
     path('registrarse', TemplateView.as_view(template_name='index.html')),
     path('carrito', TemplateView.as_view(template_name='index.html')),
+    path('carritoCart', TemplateView.as_view(template_name='index.html')),
     path('detalle/<int:id>/', TemplateView.as_view(template_name='index.html')),
     path('api/admin/', admin.site.urls),
     path('api/clientes/',include('clientes.urls')),

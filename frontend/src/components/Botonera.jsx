@@ -23,21 +23,33 @@ export default function Botonera({producto}) {
         if(cantidad > 1)
         setCantidad(cantidad - 1);
     }
-    const agregarCarrito = async ()=>{
-        if(token){
+    const agregarCarrito = async () => {
+        if (token) {
             const data = {
-                "id_producto":producto.id_producto,
+                "id_producto": producto.id_producto,
                 "cantidad": cantidad
             }
-            await agregarProductoCarrito(data,token)
+            await agregarProductoCarrito(data, token)
             toast("Producto agregado a carrito correctamente")
-        }else{
-            toast("Recuerda loguearte para guardar productos en tu carrito")
+        } else {
+            const carritoLocal = JSON.parse(localStorage.getItem('carritoLocal')) || [];
+            const productoEnCarrito = carritoLocal.find(item => item.id_producto === producto.id_producto);
+            if (productoEnCarrito) {
+                productoEnCarrito.cantidad += cantidad;
+            } else {
+                carritoLocal.push({
+                    id_producto: producto.id_producto,
+                    nombre: producto.nombre,
+                    precio: producto.precio,
+                    cantidad: cantidad
+                });
+            }
+            localStorage.setItem('carritoLocal', JSON.stringify(carritoLocal));
+            toast("Producto agregado al carrito local correctamente");
         }
     }
   return (
     <div>
-
         <button type="button" className="btn btn-primary" onClick={agregarCarrito}> Agregar Carrito</button>
         <button type="button" className="btn btn-primary" onClick={restar}>-</button>
         <button type="button" className="btn btn-primary" onClick={sumar}>+</button>

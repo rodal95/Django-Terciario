@@ -9,6 +9,7 @@ import {Toaster} from 'react-hot-toast'
 import { Register } from './pages/register/Register'
 import { Home } from './pages/home/home'
 import { Footer } from './components/Footer';
+import { CartNoLog } from './pages/cartNoLog/CartNoLog';
 function App() {
   return (
     <div className="App">
@@ -17,6 +18,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home/>}/>
           <Route path='/cliente' element={<Login/>}/>
+          <Route path='/carritoCart' element={<CartNoLog/>}/>
           <Route path='/carrito' element={<Cart/>}/>
           <Route path='/clienteLog' element={<User/>}/>
           <Route path='/registrarse' element={<Register/>}/>
