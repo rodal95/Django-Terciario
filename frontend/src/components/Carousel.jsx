@@ -10,13 +10,13 @@ export function Carousel() {
         </div>
         <div class="carousel-inner">
             <div class="carousel-item active">
-            <img src="https://www.plusinformacion.com.ar/adjuntos/imagenes-notas/80714.jpg" class="d-block w-100" alt="..."/>
+            <img src="http://imgfz.com/i/ixBFGWJ.png" class="d-block w-100" alt="..."/>
             </div>
             <div class="carousel-item">
-            <img src="https://pbs.twimg.com/media/Fn0z0mfXoA4Ac4g.jpg" class="d-block w-100" alt="..."/>
+            <img src="https://imgfz.com/i/n9o3PV2.png" class="d-block w-100" alt="..."/>
             </div>
             <div class="carousel-item">
-            <img src="https://www.cultura.gob.ar/media/uploads/libros1.jpg" class="d-block w-100" alt="..."/>
+            <img src="https://imgfz.com/i/H4OiC3V.png" class="d-block w-100" alt="..."/>
             </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">

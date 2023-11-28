@@ -42,7 +42,7 @@ export default function ProductDetail() {
 
         ) : (
             <div style={{height:"500px"}}>
-                <button class="btn btn-primary" type="button" disabled>
+                <button class="btn btn-dark" type="button" disabled>
                     <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
                     <span role="status">Cargando, aguarde por favor...</span>
                 </button>

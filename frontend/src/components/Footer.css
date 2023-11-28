@@ -1,5 +1,5 @@
 .footer {
-    background-color: yellow;
+    background-color: #FED104;
     color: #000000;
     padding: 20px 0;
   }
@@ -39,6 +39,7 @@
     height: 100px;
     padding: 0;
     margin: 0;
+    object-fit: contain
   }
   /* Estilos para diferentes tamaños de pantalla */
   @media screen and (max-width: 900px) {

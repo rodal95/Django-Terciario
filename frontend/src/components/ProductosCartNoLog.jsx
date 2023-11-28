@@ -36,6 +36,7 @@ export function ProductosCartNoLog({producto}) {
         localStorage.setItem('carritoLocal', JSON.stringify(carritoLocal));
         window.location.reload();
     };
+   
   return (
     <>
     {producto ? 
@@ -57,7 +58,7 @@ export function ProductosCartNoLog({producto}) {
                     <td>
                         {cantidad}
                     </td>
-                    <td>{producto.subtotal}</td>
+                    <td>{(producto.precio * producto.cantidad).toFixed(2)}</td>
                     <td>
                         <button type="button" className="btn btn-primary" onClick={sumarCantidad}>+</button>
                         <button type="button" className="btn btn-primary" onClick={restarCantidad}>-</button>

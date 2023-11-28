@@ -1,11 +1,12 @@
 .bg-custom-color{
-    background-color: yellow;
+    background-color: #FED104;
 }
 .logo{
     width: 300px;
     height: 100px;
     padding: 0;
     margin: 0;
+    object-fit: contain
 }
 .collapse{
     display: flex;

@@ -47,7 +47,7 @@ export function Login() {
         </div>
         <div>
           <a href = "/registrarse">No tenes cuenta? Registrate aqui</a><br/>
-          <button type="submit" class="btn btn-primary">Ingresar</button>
+          <button type="submit" class="btn btn-dark">Ingresar</button>
         </div>
         
         

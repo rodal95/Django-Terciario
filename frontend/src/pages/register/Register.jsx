@@ -64,7 +64,7 @@ export function Register() {
           {errors.confirmPassword && <span>Este Campo es requerido</span>}
         </div>
         <div>
-          <button class="btn btn-primary" type="submit">Registrarse</button><br/>
+          <button class="btn btn-dark" type="submit">Registrarse</button><br/>
           <a href="/cliente">Ya tenes cuenta? Inicia sesion</a>
         </div>
         

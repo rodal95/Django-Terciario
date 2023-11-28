@@ -61,6 +61,21 @@ export function CartNoLog() {
     },1500)
     
   }
+  const calcularSubtotal = (producto) => {
+    const precio = parseFloat(producto.precio);
+    const cantidad = producto.cantidad;
+    return precio * cantidad;
+  };
+
+  const calcularTotalCarrito = () => {
+    const total = carritoLocal.reduce((acc, producto) => {
+      const subtotal = calcularSubtotal(producto);
+      return acc + subtotal;
+    }, 0);
+    return total;
+  };
+
+  const totalCarrito = calcularTotalCarrito();
 
   return (
     <div>
@@ -76,7 +91,9 @@ export function CartNoLog() {
 
       {/* Botón para finalizar el pedido */}
       {carritoLocal.length > 0 && (
+        <>
         <button className='btn btn-primary' onClick={finalizarPedido}>Finalizar Pedido</button>
+        <h3>Total: ${totalCarrito.toFixed(2)}</h3></>
       )}
 
       {/* Modal para el formulario de registro */}

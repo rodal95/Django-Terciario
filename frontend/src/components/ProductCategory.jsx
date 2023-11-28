@@ -17,7 +17,12 @@ export function ProductCategory({ producto }) {
     }
     traerProductosCategoria()
     }, [producto])
-
+    function truncateText(text, limit) {
+        if (text.length <= limit) {
+          return text;
+        }
+        return `${text.substring(0, limit)}...`;
+      }
   return (
     <div >
         <div className='tituloProductoCategoria'>
@@ -29,8 +34,11 @@ export function ProductCategory({ producto }) {
             {productosRelacionados.map((prod) => (
                 <div key={prod.id_producto} className='eachProduct'>
                     <Link to={`/detalle/${prod.id_producto}`}>
-                    <img src={prod.imagen} alt={prod.nombre} />
-                    <h6>{prod.nombre}</h6>
+                        <div className='imagenProducto'>
+                             <img src={prod.imagen} alt={prod.nombre} />
+                        </div>
+                   
+                    <h6>{truncateText(prod.nombre,20)}</h6>
                     <h6>${prod.precio}</h6>
                     </Link>
                 </div>

@@ -50,9 +50,9 @@ export default function Botonera({producto}) {
     }
   return (
     <div>
-        <button type="button" className="btn btn-primary" onClick={agregarCarrito}> Agregar Carrito</button>
-        <button type="button" className="btn btn-primary" onClick={restar}>-</button>
-        <button type="button" className="btn btn-primary" onClick={sumar}>+</button>
+        <button type="button" className="btn btn-dark" onClick={agregarCarrito}> Agregar Carrito</button>
+        <button type="button" className="btn btn-dark" onClick={restar}>-</button>
+        <button type="button" className="btn btn-dark" onClick={sumar}>+</button>
         <span>Cantidad: {cantidad}</span>
     </div>
   )
